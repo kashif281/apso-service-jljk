@@ -1,0 +1,257 @@
+{
+  "entities": [
+    {
+      "name": "Course",
+      "created_at": true,
+      "updated_at": true,
+      "fields": [
+        {
+          "name": "title",
+          "type": "varchar",
+          "nullable": false,
+          "isIndex": true,
+          "isUnique": true
+        },
+        {
+          "name": "description",
+          "type": "text",
+          "nullable": true
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp",
+          "nullable": false,
+          "default": "CURRENT_TIMESTAMP"
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp",
+          "nullable": false,
+          "default": "CURRENT_TIMESTAMP"
+        }
+      ],
+      "indexes": [
+        {
+          "fields": [
+            "title"
+          ],
+          "unique": true
+        }
+      ],
+      "uniques": []
+    },
+    {
+      "name": "Student",
+      "created_at": true,
+      "updated_at": true,
+      "fields": [
+        {
+          "name": "first_name",
+          "type": "varchar",
+          "nullable": false
+        },
+        {
+          "name": "last_name",
+          "type": "varchar",
+          "nullable": false
+        },
+        {
+          "name": "email",
+          "type": "varchar",
+          "nullable": false,
+          "isUnique": true
+        },
+        {
+          "name": "enrollment_date",
+          "type": "date",
+          "nullable": false
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp",
+          "nullable": false,
+          "default": "CURRENT_TIMESTAMP"
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp",
+          "nullable": false,
+          "default": "CURRENT_TIMESTAMP"
+        }
+      ],
+      "indexes": [
+        {
+          "fields": [
+            "email"
+          ],
+          "unique": true
+        }
+      ],
+      "uniques": []
+    },
+    {
+      "name": "Instructor",
+      "created_at": true,
+      "updated_at": true,
+      "fields": [
+        {
+          "name": "first_name",
+          "type": "varchar",
+          "nullable": false
+        },
+        {
+          "name": "last_name",
+          "type": "varchar",
+          "nullable": false
+        },
+        {
+          "name": "email",
+          "type": "varchar",
+          "nullable": false,
+          "isUnique": true
+        },
+        {
+          "name": "hire_date",
+          "type": "date",
+          "nullable": false
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp",
+          "nullable": false,
+          "default": "CURRENT_TIMESTAMP"
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp",
+          "nullable": false,
+          "default": "CURRENT_TIMESTAMP"
+        }
+      ],
+      "indexes": [
+        {
+          "fields": [
+            "email"
+          ],
+          "unique": true
+        }
+      ],
+      "uniques": []
+    },
+    {
+      "name": "Assignment",
+      "created_at": true,
+      "updated_at": true,
+      "fields": [
+        {
+          "name": "title",
+          "type": "varchar",
+          "nullable": false
+        },
+        {
+          "name": "description",
+          "type": "text",
+          "nullable": true
+        },
+        {
+          "name": "due_date",
+          "type": "date",
+          "nullable": false
+        },
+        {
+          "name": "course_id",
+          "type": "integer",
+          "nullable": false
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp",
+          "nullable": false,
+          "default": "CURRENT_TIMESTAMP"
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp",
+          "nullable": false,
+          "default": "CURRENT_TIMESTAMP"
+        }
+      ],
+      "indexes": [
+        {
+          "fields": [
+            "course_id"
+          ],
+          "unique": false
+        }
+      ],
+      "uniques": []
+    },
+    {
+      "name": "Enrollment",
+      "created_at": true,
+      "updated_at": true,
+      "fields": [
+        {
+          "name": "student_id",
+          "type": "integer",
+          "nullable": false
+        },
+        {
+          "name": "course_id",
+          "type": "integer",
+          "nullable": false
+        },
+        {
+          "name": "enrollment_date",
+          "type": "date",
+          "nullable": false
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp",
+          "nullable": false,
+          "default": "CURRENT_TIMESTAMP"
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp",
+          "nullable": false,
+          "default": "CURRENT_TIMESTAMP"
+        }
+      ],
+      "indexes": [
+        {
+          "fields": [
+            "student_id",
+            "course_id"
+          ],
+          "unique": true
+        }
+      ],
+      "uniques": []
+    }
+  ],
+  "relationships": [
+    {
+      "from": "Course",
+      "to": "Assignment",
+      "type": "OneToMany"
+    },
+    {
+      "from": "Student",
+      "to": "Enrollment",
+      "type": "OneToMany"
+    },
+    {
+      "from": "Course",
+      "to": "Enrollment",
+      "type": "OneToMany"
+    },
+    {
+      "from": "Instructor",
+      "to": "Course",
+      "type": "OneToMany"
+    }
+  ],
+  "_removedEntities": []
+}
